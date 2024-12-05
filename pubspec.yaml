@@ -46,6 +46,7 @@ dependencies:
   modal_bottom_sheet: ^3.0.0
   scrollable_positioned_list: ^0.3.8
   flutter_staggered_grid_view: ^0.7.0
+  get_it: ^7.2.0
 
 dev_dependencies:
   flutter_test:
@@ -55,6 +56,8 @@ dev_dependencies:
 
   flutter_lints: ^4.0.0
 
-flutter:
 
+flutter:
   uses-material-design: true
+  assets:
+    - assets/

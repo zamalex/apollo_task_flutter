@@ -1,7 +1,20 @@
+import 'package:apollo_task_flutter/data/service_locator.dart';
+import 'package:apollo_task_flutter/domain/items_use_case.dart';
+import 'package:apollo_task_flutter/presentation/providers/items_provider.dart';
+import 'package:apollo_task_flutter/presentation/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  init();
+
+
+  runApp(MultiProvider(
+
+      providers: [
+        ChangeNotifierProvider<ItemsProvider>(create: (context) => ItemsProvider(),)
+      ],
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +28,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: Container(),
+      home: HomeScreen(),
     );
   }
 }
