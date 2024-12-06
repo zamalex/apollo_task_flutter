@@ -1,4 +1,5 @@
 import 'package:apollo_task_flutter/data/model/list_response.dart';
+import 'package:apollo_task_flutter/presentation/theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
@@ -7,30 +8,33 @@ import 'package:shimmer/shimmer.dart';
 class DetailsAppBar extends StatelessWidget {
   const DetailsAppBar({
     super.key,
-    required this.item,
+    required this.isCollapsed,
+    required this.recipe,
     required this.isLoading,
     required this.chewieController,
   });
 
-  final Item item;
+  final Recipe recipe;
   final bool isLoading;
+  final bool isCollapsed;
   final ChewieController? chewieController;
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      backgroundColor: Colors.white,
       floating: true,
       pinned: true,
-      title: Text(item.name??''),
+    //  title: Text(recipe.name??''),
       leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios_new, color: Colors.black),
+        icon: Icon(Icons.arrow_back_ios_new, color: isCollapsed?AppTheme.kPrimaryColor:Colors.black),
         onPressed: () => Navigator.of(context).pop(),
       ),
       expandedHeight: 300,
       flexibleSpace: Stack(
         children: [
           FlexibleSpaceBar(
-             // title: Text(item.name ?? ''),
+              title: Text(isCollapsed?recipe.name ?? '':'',style: const TextStyle(color: AppTheme.kPrimaryColor),),
               background: isLoading
                   ? Shimmer.fromColors(
                 baseColor: Colors.grey.shade300,
@@ -44,16 +48,17 @@ class DetailsAppBar extends StatelessWidget {
                   : chewieController!=null?Chewie(
                 controller: chewieController!,
               ):CachedNetworkImage(
-                imageUrl: item.image ?? '',
+                imageUrl: recipe.image ?? '',
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.cover,
               )
           ),
+          if(!isCollapsed)
           Positioned(
             child: Container(
               width: MediaQuery.of(context).size.width,
-              height: 10,
+              height: 20,
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(

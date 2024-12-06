@@ -15,19 +15,19 @@ class ListResponse {
 
 class Data {
   bool? hasMore;
-  List<Item>? items;
+  List<Recipe>? recipes;
   int? total;
   int? pageNumber;
   int? pageSize;
 
-  Data({this.hasMore, this.items, this.total, this.pageNumber, this.pageSize});
+  Data({this.hasMore, this.recipes, this.total, this.pageNumber, this.pageSize});
 
   Data.fromJson(Map<String, dynamic> json) {
     hasMore = json['hasMore'];
     if (json['items'] != null) {
-      items = <Item>[];
+      recipes = <Recipe>[];
       json['items'].forEach((v) {
-        items!.add(new Item.fromJson(v));
+        recipes!.add( Recipe.fromJson(v));
       });
     }
     total = json['total'];
@@ -38,7 +38,7 @@ class Data {
 
 }
 
-class Item {
+class Recipe {
   int? id;
   String? creatorLink;
   String? creatorImage;
@@ -51,7 +51,7 @@ class Item {
   String? creatorName;
   AdditionalInfo? additionalInfo;
 
-  Item(
+  Recipe(
       {this.id,
         this.creatorLink,
         this.creatorImage,
@@ -64,7 +64,7 @@ class Item {
         this.creatorName,
         this.additionalInfo});
 
-  Item.fromJson(Map<String, dynamic> json) {
+  Recipe.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     creatorLink = json['creatorLink'];
     creatorImage = json['creatorImage'];

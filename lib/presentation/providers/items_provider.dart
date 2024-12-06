@@ -11,11 +11,11 @@ class ItemsProvider extends ChangeNotifier {
   bool hasError = false;  // Add an error state to notify the UI
   String errorMessage = '';  // Store error message
 
-  List<Item> _items = [];
+  List<Recipe> _recipes = [];
   List<ListProduct> _ingredients = [];
   List<Step> _steps = [];
 
-  List<Item> get items => _items;
+  List<Recipe> get items => _recipes;
   List<ListProduct> get ingredients => _ingredients;
   List<Step> get steps => _steps;
 
@@ -45,7 +45,7 @@ class ItemsProvider extends ChangeNotifier {
 
   void _handleSuccessItems(ListResponse listResponse) {
     if (listResponse.error == null) {
-      _items = listResponse.data!.items!;
+      _recipes = listResponse.data!.recipes!;
       hasError = false;
       errorMessage = '';
     } else {

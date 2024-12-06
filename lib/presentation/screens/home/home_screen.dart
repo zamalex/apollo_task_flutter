@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       )
-                          : GridItem(item: value.items[index]);
+                          : GridItem(recipe: value.items[index]);
                     },
                     childCount: isLoading ? 6 : value.items.length, // Show shimmer for 6 items while loading
                   ),

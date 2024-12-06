@@ -3,14 +3,10 @@ import 'package:flutter/material.dart';
 import '../../theme.dart';
 
 class TabsWidget extends StatefulWidget {
-   TabsWidget({
-    super.key,
-    required this.onSelect,
-    this.selectedIndex=0
-  });
+  TabsWidget({super.key, required this.onSelect, this.selectedIndex = 0});
 
   final Function onSelect;
-   int selectedIndex;
+  int selectedIndex;
 
   @override
   State<TabsWidget> createState() => _TabsWidgetState();
@@ -23,34 +19,34 @@ class _TabsWidgetState extends State<TabsWidget> {
       children: [
         Expanded(
           child: InkWell(
-              onTap: (){
+              onTap: () {
                 widget.onSelect(0);
               },
-              child: SingleTab(text: 'Ingredients', isSelected: widget.selectedIndex==0,)),
+              child: SingleTab(
+                text: 'Ingredients',
+                isSelected: widget.selectedIndex == 0,
+              )),
         ),
-        const SizedBox(width: 10,),
+        const SizedBox(
+          width: 10,
+        ),
         Expanded(
-          child: InkWell
-
-            (
-              onTap: (){
+          child: InkWell(
+              onTap: () {
                 widget.onSelect(1);
               },
-              child: SingleTab(text: 'Instructions', isSelected: widget.selectedIndex==1,)),
+              child: SingleTab(
+                text: 'Instructions',
+                isSelected: widget.selectedIndex == 1,
+              )),
         ),
-
-
       ],
     );
   }
 }
 
 class SingleTab extends StatelessWidget {
-  const SingleTab({
-    super.key,
-    required this.isSelected,
-    required this.text
-  });
+  const SingleTab({super.key, required this.isSelected, required this.text});
 
   final bool isSelected;
   final String text;
@@ -59,14 +55,15 @@ class SingleTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(8),
       child: Text(
         text,
-        style: TextStyle(color:isSelected?Colors.yellow:Colors.black),
+        style: TextStyle(color: isSelected ? Colors.yellow : Colors.black),
       ),
       decoration: BoxDecoration(
-        border: Border.all(color: isSelected?AppTheme.kPrimaryColor:Colors.black),
-          color: isSelected?AppTheme.kPrimaryColor:Colors.white,
+          border: Border.all(
+              color: isSelected ? AppTheme.kPrimaryColor : Colors.black),
+          color: isSelected ? AppTheme.kPrimaryColor : Colors.white,
           borderRadius: BorderRadius.circular(20)),
     );
   }

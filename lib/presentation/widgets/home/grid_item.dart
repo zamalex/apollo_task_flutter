@@ -6,9 +6,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class GridItem extends StatelessWidget {
-  const GridItem({super.key, required this.item});
+  const GridItem({super.key, required this.recipe});
 
-  final Item item;
+  final Recipe recipe;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class GridItem extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => DetailsScreen(item: item,),
+            builder: (context) => DetailsScreen(recipe: recipe,),
           ));
         },
         child: Container(
@@ -45,15 +45,15 @@ class GridItem extends StatelessWidget {
                                         Image.asset('assets/rabbit.png',fit: BoxFit.cover,),
                                     memCacheHeight: 400,
                                     memCacheWidth: 400,
-                                    imageUrl: item.image ?? '',
+                                    imageUrl: recipe.image ?? '',
                                     fit: BoxFit.cover,
                                     width: double.infinity,
                                     height: double.infinity,
                                   ),
                                 ),
                                 
-                                Positioned(child: Spotlight(),top:5,left: 5,),
-                                Positioned(child:DurationWidget(),bottom:5,left: 5,)
+                                const Positioned(child: Spotlight(),top:5,left: 5,),
+                                const Positioned(child:DurationWidget(),bottom:5,left: 5,)
                               ],
                             ),
                           ),
@@ -62,14 +62,14 @@ class GridItem extends StatelessWidget {
                   Expanded(
                       flex: 3,
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         color: Colors.white,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              item.name ?? '',
-                              style: TextStyle(
+                              recipe.name ?? '',
+                              style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -81,14 +81,14 @@ class GridItem extends StatelessWidget {
                                 contentPadding: EdgeInsets.zero,
                                 leading: CircleAvatar(
                                   backgroundImage: NetworkImage(
-                                    item.creatorImage ?? '',
+                                    recipe.creatorImage ?? '',
                                   ),
                                 ),
-                                title: Text('powered by'),
+                                title: const Text('powered by'),
                                 subtitle: Text(
-                                  item.creatorName ?? '',
+                                  recipe.creatorName ?? '',
                                   maxLines: 1,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       overflow: TextOverflow.ellipsis),
                                 ),
                               ),
