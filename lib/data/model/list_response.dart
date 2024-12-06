@@ -1,8 +1,9 @@
 class ListResponse {
   bool? success;
   Data? data;
+  String? error;
 
-  ListResponse({this.success, this.data,});
+  ListResponse({this.success, this.data,this.error});
 
   ListResponse.fromJson(Map<String, dynamic> json) {
     success = json['success'];

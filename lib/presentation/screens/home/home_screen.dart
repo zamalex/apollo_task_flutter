@@ -6,9 +6,14 @@ import 'package:shimmer/shimmer.dart'; // Import shimmer package
 
 import '../../widgets/home/grid_item.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   getHomeRecipes(BuildContext context){
 
     Future.delayed(Duration.zero).then((value) {
@@ -17,16 +22,24 @@ class HomeScreen extends StatelessWidget {
     },);
   }
 
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    getHomeRecipes(context);
+
+  }
   @override
   Widget build(BuildContext context) {
 
-    getHomeRecipes(context);
 
     return Scaffold(
       backgroundColor: AppTheme.kGreyColor,
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
+          const SliverAppBar(
             elevation: 0,
             expandedHeight: 100,
             floating: false,
@@ -72,14 +85,14 @@ class HomeScreen extends StatelessWidget {
                         highlightColor: Colors.grey.shade100,
                         child: Container(
                           color: Colors.white,
-                          margin: EdgeInsets.all(8),
+                          margin: const EdgeInsets.all(8),
                           child: Column(
                             children: [
                               Container(
                                 height: 120,
                                 color: Colors.grey.shade300,
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Container(
                                 height: 20,
                                 color: Colors.grey.shade300,
@@ -92,7 +105,7 @@ class HomeScreen extends StatelessWidget {
                     },
                     childCount: isLoading ? 6 : value.items.length, // Show shimmer for 6 items while loading
                   ),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     childAspectRatio: .6,
                     mainAxisSpacing: 8,

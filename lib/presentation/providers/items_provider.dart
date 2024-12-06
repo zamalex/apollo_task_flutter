@@ -7,55 +7,63 @@ import 'package:flutter/cupertino.dart';
 import '../../data/service_locator.dart';
 
 class ItemsProvider extends ChangeNotifier {
-
   bool isLoading = false;
-   List<Item> _items=[];
+  bool hasError = false;  // Add an error state to notify the UI
+  String errorMessage = '';  // Store error message
 
-   List<ListProduct> _ingredients=[];
-   List<Step> _steps=[];
+  List<Item> _items = [];
+  List<ListProduct> _ingredients = [];
+  List<Step> _steps = [];
 
-   List<Item> get  items =>_items;
-   List<ListProduct> get  ingredients =>_ingredients;
-   List<Step> get  steps =>_steps;
+  List<Item> get items => _items;
+  List<ListProduct> get ingredients => _ingredients;
+  List<Step> get steps => _steps;
 
+  getItems() async {
+    isLoading = true;
+    notifyListeners();
 
-   getItems()async{
-     isLoading = true;
+    var result = await sl<ItemsUseCase>().getItems();
 
-     notifyListeners();
-
-    ListResponse? list =await  sl<ItemsUseCase>().getItems();
-
-    if(list!=null){
-      _items = list.data!.items!;
-
-    }
-     isLoading = false;
-
-     notifyListeners();
-
-   }
-
-
-   getDetails()async{
-
-     isLoading = true;
-
-     notifyListeners();
-    DetailsResponse? response =await  sl<ItemsUseCase>().getDetails();
-
-    if(response!=null){
-      _ingredients = response.data!.listProducts??[];
-      _steps = response.data!.steps??[];
-
-
-    }
+    result.isRight ? _handleSuccessItems(result.right!) : _handleError(result.left!);
 
     isLoading = false;
-     notifyListeners();
+    notifyListeners();
+  }
 
-   }
+  getDetails() async {
+    isLoading = true;
+    notifyListeners();
+
+    var result = await sl<ItemsUseCase>().getDetails();
+
+    result.isRight ? _handleSuccessDetails(result.right!) : _handleError(result.left!);
+
+    isLoading = false;
+    notifyListeners();
+  }
+
+  void _handleSuccessItems(ListResponse listResponse) {
+    if (listResponse.error == null) {
+      _items = listResponse.data!.items!;
+      hasError = false;
+      errorMessage = '';
+    } else {
+      _handleError(listResponse.error!);
+    }
+  }
+
+  void _handleSuccessDetails(DetailsResponse detailsResponse) {
+    _ingredients = detailsResponse.data?.listProducts ?? [];
+    _steps = detailsResponse.data?.steps ?? [];
+    hasError = false;
+    errorMessage = '';
+  }
+
+  void _handleError(String error) {
+    hasError = true;
 
 
-
+    print('errrror ${error}');
+  }
 }

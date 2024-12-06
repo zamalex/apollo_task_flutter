@@ -24,26 +24,19 @@ class _TabsWidgetState extends State<TabsWidget> {
         Expanded(
           child: InkWell(
               onTap: (){
-                setState(() {
-                  widget.selectedIndex=0;
-                  widget.onSelect(0);
-                });
+                widget.onSelect(0);
               },
               child: SingleTab(text: 'Ingredients', isSelected: widget.selectedIndex==0,)),
         ),
-        SizedBox(width: 10,),
+        const SizedBox(width: 10,),
         Expanded(
           child: InkWell
 
             (
               onTap: (){
-                setState(() {
-                  widget.selectedIndex=1;
-                  widget.onSelect(1);
-
-                });
+                widget.onSelect(1);
               },
-              child: SingleTab(text: 'Ingredients', isSelected: widget.selectedIndex==1,)),
+              child: SingleTab(text: 'Instructions', isSelected: widget.selectedIndex==1,)),
         ),
 
 
@@ -66,7 +59,7 @@ class SingleTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       child: Text(
         text,
         style: TextStyle(color:isSelected?Colors.yellow:Colors.black),

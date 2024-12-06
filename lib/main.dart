@@ -1,5 +1,6 @@
 import 'package:apollo_task_flutter/data/service_locator.dart';
 import 'package:apollo_task_flutter/domain/items_use_case.dart';
+import 'package:apollo_task_flutter/presentation/providers/content_switch_provider.dart';
 import 'package:apollo_task_flutter/presentation/providers/items_provider.dart';
 import 'package:apollo_task_flutter/presentation/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,8 @@ void main() {
   runApp(MultiProvider(
 
       providers: [
-        ChangeNotifierProvider<ItemsProvider>(create: (context) => ItemsProvider(),)
+        ChangeNotifierProvider<ItemsProvider>(create: (context) => ItemsProvider(),),
+        ChangeNotifierProvider<ContentSwitchProvider>(create: (context) => ContentSwitchProvider(),)
       ],
       child: const MyApp()));
 }

@@ -1,20 +1,20 @@
+// items_use_case.dart
 import 'package:apollo_task_flutter/data/model/details_response.dart';
 import 'package:apollo_task_flutter/data/model/list_response.dart';
 
-import 'item_model.dart';
+import '../data/network/either.dart';
 import 'repo_interface.dart';
 
-class ItemsUseCase{
-  RepoInterface _repoInterface;
+class ItemsUseCase {
+  final RepoInterface _repoInterface;
 
   ItemsUseCase(this._repoInterface);
 
-
-  Future<ListResponse?> getItems(){
+  Future<Either<String, ListResponse>> getItems() {
     return _repoInterface.getItems();
   }
 
-  Future<DetailsResponse?> getDetails(){
+  Future<Either<String, DetailsResponse>> getDetails() {
     return _repoInterface.getDetails();
   }
 }
