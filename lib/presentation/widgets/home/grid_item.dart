@@ -17,7 +17,7 @@ class GridItem extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => DetailsScreen(),
+            builder: (context) => DetailsScreen(item: item,),
           ));
         },
         child: Container(
@@ -29,7 +29,7 @@ class GridItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                      flex: 5,
+                      flex: 4,
                       child: Stack(
                         children: [
                           Padding(
@@ -40,9 +40,9 @@ class GridItem extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(15),
                                   child: CachedNetworkImage(
                                     errorWidget: (context, url, error) =>
-                                        Image.asset('assets/rabbit.png'),
+                                        Image.asset('assets/rabbit.png',fit: BoxFit.cover,),
                                     placeholder: (context, url) =>
-                                        Image.asset('assets/rabbit.png'),
+                                        Image.asset('assets/rabbit.png',fit: BoxFit.cover,),
                                     memCacheHeight: 400,
                                     memCacheWidth: 400,
                                     imageUrl: item.image ?? '',
@@ -60,7 +60,7 @@ class GridItem extends StatelessWidget {
                         ],
                       )),
                   Expanded(
-                      flex: 4,
+                      flex: 3,
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         color: Colors.white,

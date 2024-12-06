@@ -1,3 +1,4 @@
+import 'package:apollo_task_flutter/data/model/details_response.dart';
 import 'package:apollo_task_flutter/data/network/network.dart';
 import 'package:apollo_task_flutter/domain/item_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,6 +26,23 @@ class RepoImpl extends RepoInterface{
     return null;
     }
 
+  }
+
+  @override
+  Future<DetailsResponse?> getDetails()async {
+    try {
+      final response = await _network.get(Network.DETAILS_URL);
+
+      DetailsResponse detailsResponse = DetailsResponse.fromJson(response.data);
+
+      debugPrint('details response ${detailsResponse.success}');
+      return detailsResponse;
+
+    } catch (e) {
+      print(e.toString());
+
+      return null;
+    }
   }
 
 }
